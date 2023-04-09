@@ -10,7 +10,9 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::select('posts.id','posts.title','posts.category','posts.content','posts.content','posts.status',
+        'users.name as created_by', 'posts.created_at')->join('users', 'users.id', 'posts.created_by')
+        ->latest()->get();
 
         if($posts->count() > 0){
             $data = [
@@ -21,7 +23,7 @@ class PostController extends Controller
         else{
             $data = [
                 'status' => 404,
-                'students' => 'No records'
+                'posts' => 'No records'
             ];
         }
     

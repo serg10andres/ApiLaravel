@@ -60,6 +60,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'phone' => $request->phone,
+                'location' => $request->location
             ]);
         }
 
@@ -67,7 +68,7 @@ class UserController extends Controller
         if($user){
             return response()->json([
                 'status' => 200,
-                'message' => "User created successfully"
+                'message' => "User created successfully, now you can login"
             ], 200);
         }
         else
@@ -147,11 +148,12 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
+                'location' => $request->location,
             ]);
 
             if($request->password){
                 $user->update([
-                    'password' => Hash::make($request->email),
+                    'password' => Hash::make($request->password),
                 ]);   
             }
             

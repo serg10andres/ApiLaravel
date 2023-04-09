@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('category');
             $table->string('content');
             $table->string('status');
-            $table->bigInteger('created_by');
+            $table->bigInteger('created_by')->unsigned();
             $table->index('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
